@@ -1,0 +1,184 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <!-- <div class="container-fluid">
+    <div class="header-body">
+      Card stats
+      <div class="row">
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Traffic</h5>
+                  <span class="h2 font-weight-bold mb-0">350,897</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                    <i class="fas fa-chart-bar"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-muted text-sm">
+                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                <span class="text-nowrap">Since last month</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">New users</h5>
+                  <span class="h2 font-weight-bold mb-0">2,356</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                    <i class="fas fa-chart-pie"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-muted text-sm">
+                <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
+                <span class="text-nowrap">Since last week</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Sales</h5>
+                  <span class="h2 font-weight-bold mb-0">924</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                    <i class="fas fa-users"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-muted text-sm">
+                <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
+                <span class="text-nowrap">Since yesterday</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
+                  <span class="h2 font-weight-bold mb-0">49,65%</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                    <i class="fas fa-percent"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-muted text-sm">
+                <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
+                <span class="text-nowrap">Since last month</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</div>
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Vendor List</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush" style="display: inline-table;">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Email</th>
+                <th scope="col">Locality</th>
+                <th scope="col">Wallet Money</th>
+                <th scope="col">Services</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of vendorList;">
+                <th scope="row">
+                  <a [routerLink]="['/admin/vendor-profile']" [queryParams]="{id: item.user_id}">{{item.name}}</a>
+                </th>
+                <td>
+                  {{item.phone}}
+                </td>
+                <td>
+                  {{item.email}}
+                </td>
+                <td>
+                  {{item.locality}}
+                </td>
+                <td>
+                  {{item.wallet_money}}
+                </td>
+                <td>
+                  <ul class="services_list">
+                    <li *ngFor="let service of item.vendor_services">{{service.service_detail.name}}</li>
+                  </ul>
+                </td>
+                <td>
+                  <!-- <div class="nav-item" ngbDropdown x-placement="bottom-right">
+                    <a class="nav-link nav-link-icon" role="button" ngbDropdownToggle>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div class="dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu>
+                      <a class="dropdown-item" href="javascript:void(0)" (click)='openDialog(item)'>Edit</a>
+                      <a class="dropdown-item" href="javascript:void(0)" (click)="deleteVendorServices(item.user_id)">Delete</a>
+                    </div>
+                  </div> -->
+                  <button mat-icon-button (click)='deleteVendorServices(item.user_id)'>
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="col" style="padding-top: 2rem;">
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Add a Vendor
+          </mat-panel-title>
+          <mat-panel-description>
+            Type the Phone number of the vendor to be added
+            <mat-icon>person_add</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="error"></div>
+        <div class="text-success"></div>
+        <form role="form" #phoneForm="ngForm" novalidate>
+          <mat-label>Phone Number</mat-label>
+          <input class="form-control" matInput [(ngModel)]="vendor.phone" type="phone" name="phone" #phone="ngModel"
+            required>
+        </form>
+
+        <mat-action-row>
+          <button mat-button color="primary" [disabled]="!phoneForm.valid" (click)="submit(phoneForm)">Submit</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </div> -->
+</div>

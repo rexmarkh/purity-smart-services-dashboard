@@ -1,0 +1,18 @@
+.card-profile-image img{
+    width: 180px;
+}
+.mask {
+    position: fixed;
+    height: 300px;
+}
+.mat-form-field {
+    width: 100%;
+}
+.add-new-address {
+    display: flex;
+    align-items: flex-start;
+    button {
+        height: 52px;
+        margin: 0.25em 0;
+    }
+}

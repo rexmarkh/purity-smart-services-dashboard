@@ -1,0 +1,38 @@
+<div mat-dialog-content>
+    <p> Update Vendor Details</p>
+    <form *ngIf="data?.details">
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+            <mat-label>Email</mat-label>
+            <input type="text" required aria-label="Email" matInput [(ngModel)]="data.details.email">
+        </mat-form-field><br>
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+            <mat-label>Name</mat-label>
+            <input type="text" required aria-label="name" name="Name" matInput [(ngModel)]="data.details.name">
+        </mat-form-field><br>
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+            <mat-label>City</mat-label>
+            <input type="text" required aria-label="City" name="City" matInput [(ngModel)]="data.details.city">
+        </mat-form-field><br>
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+            <mat-label>Locality</mat-label>
+            <input type="text" required aria-label="Locality" name="Locality" matInput
+                [(ngModel)]="data.details.locality">
+        </mat-form-field><br>
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+            <mat-label>Wallet money</mat-label>
+            <input type="text" required aria-label="Wallet Money" name="Wallet Money" matInput
+                [(ngModel)]="data.details.wallet_money">
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+            <mat-label>Address</mat-label>
+            <input type="text" required aria-label="address" name="Address" matInput [(ngModel)]="data.details.address">
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+            <mat-label>Phone</mat-label>
+            <input type="text" required aria-label="Phone" name="Phone" matInput [(ngModel)]="data.details.phone">
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions style="float: right;">
+    <button mat-flat-button color="primary" [mat-dialog-close]="data.details" cdkFocusInitial>Ok</button>
+</div>

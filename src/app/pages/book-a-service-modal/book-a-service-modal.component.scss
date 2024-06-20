@@ -1,0 +1,27 @@
+.demo-inline-calendar-card {
+    width: 300px;
+}
+.modal-header {
+    h6 {
+        font-size: 1rem;
+    }
+}
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+table, mat-form-field, form, .address-full-width {
+    width: 100%;
+}
+
+mat-option {
+    img {
+        width: 50px;
+    }
+    span {
+        padding-left: 10px;
+    }
+}

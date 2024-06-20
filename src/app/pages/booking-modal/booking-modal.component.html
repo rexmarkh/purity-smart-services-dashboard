@@ -1,0 +1,213 @@
+<div class="row">
+  <div class="col-12">
+    <div class="modal-content bg-secondary">
+        <div class="modal-header bg-white">
+            <h3 class="modal-title" id="modal-title-default">Choose Service Date</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close('Cross click')">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+      <div class="modal-body px-3">
+        <mat-card class="demo-inline-calendar-card">
+            <mat-calendar [(selected)]="selected"></mat-calendar>
+          </mat-card>
+      </div>
+      <div class="modal-footer bg-white">
+        <div class="text-center">
+            <button [disabled]="!selected" mat-flat-button color="primary" (click)="openAddressModal(address)">Continue</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #address let-c="close" let-d="dismiss">
+    <div class="modal-content bg-secondary">
+      <div class="modal-header bg-white">
+        <h3 class="modal-title" id="modal-title-default">Select Address</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body px-3">
+        <div *ngIf="userProfile?.user_addresses?.length > 0">
+            <form class="example-form" [formGroup]="addressForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Choose Address</mat-label>
+                            <mat-select formControlName="address_name" (selectionChange)="updateAddress($event.value)">
+                              <mat-option *ngFor="let address of userProfile.user_addresses" [value]="address.address_name">
+                                {{address.address_name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field class="address-full-width" appearance="outline">
+                            <mat-label>Address</mat-label>
+                            <input matInput formControlName="address">
+                          </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Locality</mat-label>
+                            <input matInput formControlName="locality">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>City</mat-label>
+                            <input matInput formControlName="city">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="userProfile?.user_addresses?.length == 0">
+            <form class="example-form" [formGroup]="addNewAddressForm">
+                <div class="row">
+                    <div class="col-md-6">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Address Name</mat-label>
+                          <input matInput formControlName="address_name">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-12">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Address</mat-label>
+                            <input matInput formControlName="address">
+                        </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Locality</mat-label>
+                            <mat-select formControlName="locality">
+                              <mat-option *ngFor="let locality of localities" [value]="locality">
+                                {{locality}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>City</mat-label>
+                            <input matInput formControlName="city">
+                        </mat-form-field>
+                    </div>
+                  </div>
+            </form>
+        </div>
+      </div>
+      <div class="modal-footer bg-white">
+        <button *ngIf="userProfile.user_addresses.length > 0" [disabled]="addressForm.invalid" mat-flat-button color="primary" data-dismiss="modal" (click)="openSummaryModal(summary)">Continue</button>
+        <button [disabled]="addNewAddressForm.invalid" *ngIf="userProfile.user_addresses.length == 0" mat-flat-button color="primary" data-dismiss="modal" (click)="addNewAddress(summary, addNewAddressForm.getRawValue())">Continue</button>
+        
+    </div>
+    </div>
+</ng-template>
+
+<ng-template #summary let-c="close" let-d="dismiss">
+    <div class="modal-content bg-secondary">
+      <div class="modal-header bg-white">
+        <h6 class="modal-title" id="modal-title-default">Booking Summary</h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body px-3">
+        <form>
+            <h6 class=" heading-small text-muted mb-4">Service information</h6>
+            <div class=" pl-lg-4">
+                <div class=" row">
+                    <div class=" col-md-6">
+                        <div class=" form-group">
+                            <label class=" form-control-label" for="input-username"> Service Name </label>
+                            <p class="text-sm">{{serviceDetail?.name}}</p>
+                        </div>
+                    </div>
+                    <div class=" col-md-6">
+                        <div class=" form-group">
+                            <label class=" form-control-label" for="input-email"> Price </label>
+                            <p class="text-sm">₹ {{serviceDetail?.price}} Onwards**</p>
+                        </div>
+                    </div>
+                </div>
+                <div class=" row">
+                    <div class=" col-xl-6">
+                        <div class=" form-group">
+                            <label class=" form-control-label" for="input-first-name"> Service Date </label>
+                            <p class="text-sm">{{selected | date: 'dd/MM/yyyy'}}</p>
+                        </div>
+                    </div>
+                    <div class=" col-xl-6">
+                        <div class=" form-group">
+                            <label class=" form-control-label" for="input-last-name"> Booking Date </label>
+                            <p class="text-sm">{{currentDate | date: 'dd/MM/yyyy'}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class=" my-2">
+            <h6 class=" heading-small text-muted mb-4">Contact information</h6>
+            <div class=" pl-lg-4">
+                <div class=" row">
+                    <div class=" col-xl-6">
+                        <div class=" form-group"><label class=" form-control-label" for="input-address"> Name </label>
+                            <p class="text-sm">{{userProfile?.user.displayName}}</p>
+                        </div>
+                    </div>
+                    <div class=" col-xl-6">
+                        <div class=" form-group"><label class=" form-control-label" for="input-address"> Phone </label>
+                            <p class="text-sm">{{userProfile?.phone}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class=" row">
+                    <div class=" col-md-12">
+                        <div class=" form-group"><label class=" form-control-label" for="input-address"> Address </label>
+                            <p class="text-sm">{{selected_address?.address}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class=" row">
+                    <div class="col-xl-6">
+                        <div class=" form-group">
+                            <label class=" form-control-label" for="input-city"> Locality </label>
+                            <p class="text-sm">{{selected_address?.locality}}</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class=" form-group">
+                            <label class=" form-control-label" for="input-country"> City </label>
+                            <p class="text-sm">{{selected_address?.city}}</p>
+                        </div>
+                    </div>
+                    <!-- <div class=" col-md-4">
+                        <div class=" form-group">
+                            <label class=" form-control-label" for="input-country"> Pincode </label>
+                            <p class="text-sm">{{selected_address?.pincode}}</p>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <!-- <hr class=" my-4">
+            <h6 class=" heading-small text-muted mb-4">About me</h6>
+            <div class=" pl-lg-4">
+                <div class=" form-group">
+                    <label class=" form-control-label"> About Me </label>
+                    <textarea class=" form-control" placeholder="A few words about you ..." rows="4">A beautiful premium dashboard for Bootstrap 4.</textarea>
+                </div>
+            </div> -->
+        </form>
+      </div>
+      <div class="modal-footer bg-white">
+        <button mat-flat-button color="primary" data-dismiss="modal" (click)="onBookingFormSubmit()">Confirm Booking</button>
+    </div>
+    </div>
+</ng-template>

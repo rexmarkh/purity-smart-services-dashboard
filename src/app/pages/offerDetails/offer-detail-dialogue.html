@@ -1,0 +1,44 @@
+<div mat-dialog-content>
+    <p>Add/ Update Service Details</p>
+    <form *ngIf="data?.details">
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+            <mat-label>Title</mat-label>
+            <input type="text" required aria-label="Title" matInput [(ngModel)]="data.details.title"
+                [value]="serviceData.title">
+        </mat-form-field><br>
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+            <mat-label>Description</mat-label>
+            <input type="text" required aria-label="description" name="description" matInput
+                [(ngModel)]="data.details.description">
+        </mat-form-field><br>
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+            <mat-label>Discount</mat-label>
+            <input type="text" required aria-label="Discount" name="discount" matInput
+                [(ngModel)]="data.details.discount">
+        </mat-form-field><br>
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+            <mat-label>Coupon code</mat-label>
+            <input type="text" required aria-label="coupon_code" name="Coupon code" matInput
+                [(ngModel)]="data.details.coupon_code">
+        </mat-form-field><br>
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+            <mat-label>Service</mat-label>
+            <input type="text" required aria-label="Service Details" name="Service Details" matInput
+                [(ngModel)]="data.details.service_detail.name">
+        </mat-form-field>
+        <!-- <mat-label>Favorite food</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let service of serviceDetailsList" [value]="service.sid">
+                {{service.name}}
+            </mat-option>
+        </mat-select> -->
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+            <mat-label>Is Valid</mat-label>
+            <input type="text" required aria-label="Is Valid" name="is_valid" matInput
+                [(ngModel)]="data.details.is_valid">
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions style="float: right;">
+    <button mat-flat-button color="primary" [mat-dialog-close]="data.details" cdkFocusInitial>Ok</button>
+</div>

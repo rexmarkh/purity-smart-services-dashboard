@@ -1,0 +1,16 @@
+.privacyPolicy{
+    background-color: white;
+    margin: 15px;
+    padding: 15px;
+    position: relative;
+    z-index: 99;
+}
+
+a img {
+    max-height: 5rem;
+}
+mat-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}

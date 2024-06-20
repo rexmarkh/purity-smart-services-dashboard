@@ -1,0 +1,55 @@
+/* Structure */
+table {
+    width: 100%;
+  }
+  .mat-form-field{
+    width: 100%;
+  }
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  .mat-paginator{
+    margin-top: 16px;
+  }
+  .mat-table {
+    background: #fff;
+    border-radius: 21px;
+    padding: 11px;
+}
+.card-header{
+  padding: 1rem 1.5rem;
+}
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}
+.table-responsive{
+    // padding: 0rem 0rem 2rem 0rem;
+    th, td{
+        padding: 1.125rem;
+        text-align: center;
+        vertical-align: middle;
+    }
+}
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell{
+  font-size: medium;
+}
+
+.error {
+  text-align: center;
+  padding-bottom: 11px;
+  color: red;
+}
+.text-success{
+  text-align: center;
+  padding-bottom: 11px;
+}
+
+.services_list > li{
+  text-align: left;
+}

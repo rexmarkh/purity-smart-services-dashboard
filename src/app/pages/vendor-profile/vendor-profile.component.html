@@ -1,0 +1,208 @@
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+  style="background-size: cover; background-position: center top;">
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
+  <!-- Header container -->
+  <!-- <div class="container-fluid d-flex align-items-center">
+    <div class="row header-text">
+      <div class="col-lg-7 col-md-10">
+        <h1 class="display-2 text-white">Profile Details</h1>
+        <a href="#!" class="btn btn-info">Edit profile</a>
+      </div>
+    </div>
+  </div> -->
+</div>
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+      <div class="card card-profile shadow">
+        <div class="row justify-content-center">
+          <div class="col-lg-3 order-lg-2">
+            <div class="card-profile-image">
+              <a href="javascript:void(0)">
+                <img src="assets/img/theme/avatar.png" class="rounded-circle">
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+          <div class="d-flex justify-content-between">
+            <!-- <a href="javascript:void(0)" class="btn btn-sm btn-info mr-4">Connect</a>
+            <a href="javascript:void(0)" class="btn btn-sm btn-default float-right">Message</a> -->
+          </div>
+        </div>
+        
+        <div class="card-body pt-8 pt-md-8">
+          <div class="text-center">
+            <h3>
+              {{vendorProfileData?.name}}
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-8 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">{{vendorProfileData?.name}}'s account</h3>
+            </div>
+            <!-- <div class="col-4 text-right">
+              <a href="#!" class="btn btn-sm btn-primary">Settings</a>
+            </div> -->
+          </div>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="vendorProfileForm">
+            <h6 class="heading-small text-muted mb-4">User information</h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-6">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="name">
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-6">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Phone</mat-label>
+                    <input matInput formControlName="phone">
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-6">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Role</mat-label>
+                    <input matInput formControlName="role">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Wallet Money</mat-label>
+                    <input matInput formControlName="wallet_money">
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-6">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Is Profile Completed</mat-label>
+                    <input matInput formControlName="is_profile_completed">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <hr class="my-4" >
+            <!-- Address -->
+            <h6 class="heading-small text-muted mb-4">Contact information</h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Address</mat-label>
+                    <input matInput formControlName="address">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Locality</mat-label>
+                    <input matInput formControlName="locality">
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>City</mat-label>
+                    <input matInput formControlName="city">
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Pincode</mat-label>
+                    <input matInput formControlName="pincode">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <hr class="my-4">
+            <!-- Service Information -->
+            <h6 class="heading-small text-muted mb-4">Service information</h6>
+            <div class="pl-lg-4" *ngIf="servicesList">
+              <div class="row">
+                <!-- <div class="col-md-12">
+                  <div class="form-group">
+                    <div *ngFor="let service of data?.vendor_services">
+                      <mat-checkbox class="example-margin" checked disabled>{{service.service_detail.name}}</mat-checkbox>
+                    </div>
+                  </div>
+                </div> -->
+                <div class="col-lg-12">
+                  <section class="services-section">
+                      <div class="row">
+                        <div class="col-lg-6" *ngFor="let service of servicesList;let i=index">
+                          <mat-checkbox disabled [checked]="service.checked" name="{{i}}-name" (change)="updateServiceList($event, service)">
+                          {{service.name}}
+                          </mat-checkbox>
+                        </div>
+                      </div>
+                  </section>
+              </div>
+              </div>
+            </div>
+            <hr class="my-4">
+            <!-- Service Information -->
+            <h6 class="heading-small text-muted mb-4">Documents</h6>
+            <div class="row">
+              <div class="col-lg-6" *ngIf="vendorProfileData">
+                <mat-form-field appearance="outline">
+                  <mat-label>Aadhar Status</mat-label>
+                  <mat-select formControlName="aadhar_file_status">
+                    <mat-option *ngFor="let status of documentStatus" [value]="status.id">
+                      {{status.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+              </div>
+              <div class="col-lg-6" *ngIf="vendorProfileData">
+                <mat-form-field appearance="outline">
+                  <mat-label>PAN Status</mat-label>
+                  <mat-select formControlName="pan_file_status">
+                    <mat-option *ngFor="let status of documentStatus" [value]="status.id">
+                      {{status.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6" *ngIf="aadharFileUrl">
+                <h5 class="text-muted">Aadhar Proof</h5>
+                <img src="{{aadharFileUrl}}" alt="Aadhar" class="documents" (click)="openDialog(aadharFileUrl)">
+              </div>
+              <div class="col-lg-6" *ngIf="panFileUrl">
+                <h5 class="text-muted">PAN Proof</h5>
+                <img src="{{panFileUrl}}" alt="Pan" class="documents" (click)="openDialog(panFileUrl)">
+              </div>
+              <div class="col-lg-12">
+                <h5 class="text-muted" *ngIf="!aadharFileUrl && !panFileUrl">No Documents found.</h5>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button [disabled]="vendorProfileForm.invalid" mat-flat-button color="primary" data-dismiss="modal" (click)="UpdateVendorDetails()">Update</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

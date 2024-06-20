@@ -1,0 +1,122 @@
+<div class="user-home-wrapper">
+    <div class="header pb-8 pt-8 pt-lg-8 d-flex align-items-center"
+  style="background-size: cover; background-position: center top;">
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
+  <!-- Header container -->
+  <div class="container-fluid d-flex align-items-center">
+    <div class="row" style="width: 100%;">
+      <div class="col-12 text-center">
+        <h1 class="display-2 text-white">Purity Smart Services</h1>
+        <h3 class="text-white">Your one-stop solution for all your home maintenance and repair needs!</h3>
+        <!-- <a href="#!" class="btn btn-info">Edit profile</a> -->
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="header pb-8">
+        <div class="container-fluid">
+            <div class="mt--7">
+                <div class="card shadow">
+                    <div class="card-header bg-transparent">
+                      <div class="row align-items-center">
+                        <div class="col">
+                          <!-- <h6 class="text-uppercase text-muted ls-1 mb-1">Search any service</h6> -->
+                          <h2 class="mb-0">What service do you need?</h2>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <mat-form-field>
+                        <mat-label>Select a service</mat-label>
+                        <mat-select>
+                          <mat-option *ngFor="let service of servicesList" (click)="getServiceDetails(service)">
+                            <img src="{{getDocumentUrl(service.image_id)}}" alt="{{service.name}}">
+                            <span>{{service.name}}</span>
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      
+                        <!-- <form class="navbar-search navbar-search-light form-inline mr-3 d-md-flex ml-lg-auto">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Search</mat-label>
+                                <mat-icon matPrefix>search</mat-icon>
+                                <input type="text"
+                                       matInput
+                                       [formControl]="myControl"
+                                       [matAutocomplete]="auto">
+                                <mat-autocomplete #auto="matAutocomplete">
+                                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="getServiceDetails(option)">
+                                    {{option.name}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                          </form> -->
+                    </div>
+                </div>
+            </div>
+            
+          <div class="header-body pt-5">
+            <div class="card shadow bg-secondary">
+                <div class="card-header bg-white">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <h6 class="text-uppercase text-muted ls-1 mb-1">Choose your service</h6>
+                      <h2 class="mb-0">All Services</h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                    <div class="row category" *ngFor="let item of serviceCategories">
+                      <div class="col">
+                        <h2 class="mb-0">{{item.name}}</h2>
+                        <div class="row">
+                          <div class="user-home-cards col-xl-3 col-lg-4 col-md-4 pb-4" *ngFor="let service of getServicesByCategory(item.id, servicesList) ; let sindex = index" (click)="getServiceDetails(service)">
+                            <app-service-card-widget [service]="service"></app-service-card-widget>
+                          </div>
+                        </div>
+                      </div>   
+                    </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="header-body pt-5">
+            <div class="card shadow">
+                <div class="card-header bg-transparent">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <!-- <h6 class="text-uppercase text-muted ls-1 mb-1">Search any service</h6> -->
+                      <h2 class="mb-0">Need app?</h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="showcase">
+                    <div class="col-lg-6">
+                      <img src="assets/img/services/app.jpg" alt="">
+                    </div>
+                    <div class="col-lg-6">
+                      <h3 class="lead display-4 mb-4 px-md-10 px-lg-0 h1">The one app for all your home services</h3>
+                      <p class=" mb-7 px-md-10 px-lg-0 pe-xxl-15">Pick your professional services from a wide range,
+                      review their ratings and book your service, all in a few taps.</p>
+                      <div class="d-flex justify-content-center justify-content-lg-start">
+                      <span class="me-2"><a href="https://play.google.com/store/apps/details?id=com.alberoraven.puritysmartservices" class="me-2"><img class="h-11 rounded-2" alt="Hometriangle android app" src="assets/img/icons/button-google-play.svg" onerror="this.onerror=null;pagespeed.lazyLoadImages.loadIfVisibleAndMaybeBeacon(this);"></a></span>
+                      <!-- <span><a href="https://apps.apple.com/in/app/hometriangle/id6444316720" class="disabled"><img class="h-11 rounded-2" alt="Hometriangle ios app" src="assets/img/icons/button-appstore.svg" onerror="this.onerror=null;pagespeed.lazyLoadImages.loadIfVisibleAndMaybeBeacon(this);"></a></span> -->
+                      </div>
+                    </div>
+                    <div class="slogan">Purity is the mother of peace, prosperity and royalty</div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        </div>
+      </div>
+</div>
+
+
+
+
+
+
+

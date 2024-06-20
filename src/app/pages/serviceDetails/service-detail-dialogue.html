@@ -1,0 +1,32 @@
+<div mat-dialog-content>
+    <p>Add/ Update Service Details</p>
+    <form *ngIf="data?.details">
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+            <mat-label>servicename</mat-label>
+            <input type="text" required aria-label="servicename" matInput [(ngModel)]="serviceData.name">
+        </mat-form-field><br>
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+            <mat-label>Description</mat-label>
+            <!-- <input type="text" required aria-label="description" name="description" matInput
+                [(ngModel)]="serviceData.description"> -->
+            <textarea matInput aria-label="description" name="description" [(ngModel)]="serviceData.description"></textarea>
+        </mat-form-field><br>
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+            <mat-label>Duration</mat-label>
+            <input type="text" required aria-label="duration" name="duration" matInput
+                [(ngModel)]="serviceData.duration">
+        </mat-form-field><br>
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+            <mat-label>Price</mat-label>
+            <input type="text" required aria-label="price" name="price" matInput [(ngModel)]="serviceData.price">
+        </mat-form-field><br>
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+            <mat-label>Share Amount</mat-label>
+            <input type="text" required aria-label="share_amount" name="share_amount" matInput
+                [(ngModel)]="serviceData.share_amount">
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions style="float: right;">
+    <button mat-flat-button color="primary" [mat-dialog-close]="serviceData" cdkFocusInitial>Add Service</button>
+</div>

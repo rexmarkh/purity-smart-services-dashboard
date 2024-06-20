@@ -1,0 +1,41 @@
+.mask {
+    position: fixed;
+    height: 400px;
+    // background: linear-gradient(to left bottom, #dd2600, #d10043, #aa006b, #6d1982, #012d81) !important;
+}
+.display-2{
+    font-size: 2rem;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.navbar-search-light .focused .input-group {
+    border-color: #f5365c !important;
+}
+mat-form-field {
+    width: 100%;
+}
+mat-option {
+    span {
+        padding-left: 10px;
+    }
+    img {
+        width: 55px;
+    }
+}
+.category {
+    padding-bottom: 1rem;
+}
+
+.showcase {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #ffffff;
+    img {
+        width: 100%;
+    }
+}
+.slogan {
+    width: 100%;
+    text-align: center;
+}

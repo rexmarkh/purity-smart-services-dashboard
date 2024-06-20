@@ -1,0 +1,108 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$purity-client-primary: mat.define-palette(mat.$red-palette, A200, A100, A400);
+$purity-client-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$purity-client-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$purity-client-theme: mat.define-light-theme((
+  color: (
+    primary: $purity-client-primary,
+    accent: $purity-client-accent,
+    warn: $purity-client-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($purity-client-theme);
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; box-sizing: border-box;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; position: relative; min-height: 100%;}
+
+.modal-open .modal {
+    z-index: 1056;
+}
+.cdk-overlay-container {
+    z-index: 1057;
+}
+h3.modal-title {
+    margin: 0px;
+}
+h3 {
+  font-size: 1.0625rem !important;
+}
+.swal2-styled.swal2-confirm{
+    color: #fff !important;
+    background-color: #2dce89 !important;
+    border-color: #2dce89 !important;
+    box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08) !important;
+}
+.user-home-cards {
+  app-service-card-widget {
+    .card {
+        transition: all 0.15s ease-in-out;
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.025);
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        }
+    }
+  }
+}
+
+.mat-typography h5 {
+  font-size: 0.85rem;
+  color: #32325d !important;
+}
+.form-group {
+  margin-bottom: 0.5rem !important;
+}
+.mat-typography h6 {
+  margin: 0 0 6px !important;
+}
+::ng-deep .mat-select-panel {
+  background: #ffffff !important;
+}
+
+.bg-gradient-danger.mask {
+  // background: linear-gradient(to left bottom, #dd2600, #d10043, #aa006b, #6d1982, #012d81) !important;
+  background: linear-gradient(87deg,#ff5252 0,#f56036 100%)!important;
+}
+.modal-header.bg-white, .modal-footer.bg-white, div.card-header, div.card-footer {
+  background-color: #f8f9fe !important;
+}
+.modal-body, .card-body {
+  background-color: #ffffff !important;
+}
+
+app-service-card-widget {
+  .card-body {
+    background-color: #f8f9fe !important;
+  }
+}
+
+app-service-details {
+  app-service-card-widget {
+    .card-body {
+      background-color: #ffffff !important;
+    }
+  }
+}

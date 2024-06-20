@@ -1,0 +1,130 @@
+<div class="user-layout-wrapper">
+  <mat-toolbar class="user-layout-header">
+    <mat-toolbar-row>
+      <a class="navbar-brand" routerLinkActive="active" [routerLink]="['/dashboard']">
+        <img src="assets/img/brand/new-logo.png" />
+        <!-- <span>Purity Smart Services</span> -->
+      </a>
+      <span class="example-spacer"></span>
+      <button mat-raised-button color="primary" (click)="openBookaServiceModal()" class="book_a_service">
+        <i class="ni ni-archive-2"></i> &nbsp;
+        <span>Book now</span>
+      </button>
+       <!-- User -->
+    <ul class="navbar-nav align-items-center d-md-flex">
+      <li class="nav-item">
+        <a class="nav-link pr-0" role="button" href="tel:+917200361731" class="contact-btn">
+          <div class="media align-items-center">
+          <button mat-raised-button mat-icon-button color="primary" aria-label="Example icon-button with menu icon">
+            <mat-icon>phone</mat-icon>
+          </button>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item" ngbDropdown placement="bottom-right">
+        <a class="nav-link pr-0" role="button" ngbDropdownToggle>
+          <div class="media align-items-center">
+            <!-- <span class="avatar avatar-sm rounded-circle">
+              <img alt="Image placeholder" [src]=userAvatar>
+            </span>
+            <div class="media-body ml-2 d-none d-lg-block">
+              <span class="mb-0 text-sm  font-weight-bold" [innerHTML]=userName></span>
+            </div> -->
+          <button mat-raised-button mat-icon-button color="primary" aria-label="Example icon-button with menu icon">
+            <mat-icon>person</mat-icon>
+          </button>
+          </div>
+        </a>
+
+        <div class="dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu>
+          <div class=" dropdown-header noti-title">
+            <h6 class="text-overflow m-0">Welcome {{nhost.auth.getUser()?.displayName}}!</h6>
+            <!-- <p>{{nhost.auth.getUser() | json}}</p> -->
+          </div>
+          <div *ngIf="nhost.auth.getUser()">
+            <a routerLinkActive="active" [routerLink]="['/user/home']" class="dropdown-item">
+              <i class="ni ni-istanbul"></i>
+              <span>Home</span>
+            </a>
+            <!-- <a routerLinkActive="active" class="dropdown-item" (click)="openBookaServiceModal()">
+              <i class="ni ni-archive-2"></i>
+              <span>Book a Service</span>
+            </a> -->
+            <a routerLinkActive="active" [routerLink]="['/user/profile']" [queryParams]="{id: user?.id}" class="dropdown-item">
+              <i class="ni ni-single-02"></i>
+              <span>My profile</span>
+            </a>
+            <a routerLinkActive="active" [routerLink]="['/user/my-bookings']" class="dropdown-item">
+              <i class="ni ni-archive-2"></i>
+              <span>My Bookings</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a routerLinkActive="active" [routerLink]="['/user/logout']" class="dropdown-item">
+              <i class="ni ni-button-power"></i>
+              <span>Logout</span>
+            </a>
+          </div>
+          <div *ngIf="!nhost.auth.getUser()">
+            <a routerLinkActive="active" class="dropdown-item" (click)="openModal()">
+              <i class="ni ni-single-02"></i>
+              <span>Login</span>
+            </a>
+            <ng-template #classic1 let-c="close" let-d="dismiss">
+              <div class="modal-content">
+                <div class="modal-body p-0">
+                  <div class="card bg-secondary shadow border-0">
+                    <div class="card-header bg-white">
+                      <div class="text-muted text-center mb-3">
+                        <small>Sign in with</small>
+                      </div>
+                      <div class="btn-wrapper text-center">
+                        <mat-form-field class="example-form-field" appearance="outline">
+                          <mat-label>Phone</mat-label>
+                          <mat-icon matPrefix>phone</mat-icon>
+                          <input matInput type="tel" [(ngModel)]="phone">
+                          <button *ngIf="phone" matSuffix mat-icon-button aria-label="Clear" (click)="phone=''">
+                            <mat-icon>close</mat-icon>
+                          </button>
+                        </mat-form-field>
+                        <mat-form-field class="example-form-field" appearance="outline" *ngIf="hasRequestedOTP">
+                          <mat-label>Phone</mat-label>
+                          <mat-icon matPrefix>password</mat-icon>
+                          <input matInput type="number" [(ngModel)]="otp">
+                          <button *ngIf="otp" matSuffix mat-icon-button aria-label="Clear" (click)="otp=''">
+                            <mat-icon>close</mat-icon>
+                          </button>
+                        </mat-form-field>
+                        
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <!-- <div class="text-center text-muted mb-4">
+                        <small>Or sign in with credentials</small>
+                      </div> -->
+                      
+                      <div class="text-center">
+                        <button *ngIf="!hasRequestedOTP" mat-flat-button color="primary"(click)="requestOTP()">Request OTP</button>
+                        <button *ngIf="hasRequestedOTP" mat-flat-button color="primary"(click)="signIn()">Login</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </li>
+      
+    </ul>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="user-layout-container">
+    <router-outlet></router-outlet>
+  </div>
+  <mat-toolbar class="user-layout-footer">
+    <div class="footer-content">
+      <p class="text-muted text-right"><a>Purity Smart Services</a> ©2023, All Rights Reserved. &nbsp;</p>
+      <p class="text-muted text-left">Developed by Rex</p>
+    </div>
+  </mat-toolbar>
+</div>

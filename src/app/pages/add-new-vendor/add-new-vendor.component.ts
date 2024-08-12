@@ -4,6 +4,7 @@ import locations from 'src/assets/data/locality.json';
 import * as Query from '../../@shared/queries';
 import { nhost } from '../../@shared/global';
 import swal from 'sweetalert2';
+import Dropzone from "dropzone";
 
 @Component({
   selector: 'app-add-new-vendor',
@@ -15,14 +16,40 @@ export class AddNewVendorComponent implements OnInit {
   public profileForm : FormGroup;
   public addNewAddressForm : FormGroup;
   public localities: any;
+  public aadhar_file: any;
+  public pan_file: any;
+  public aadhar_file_status = 1;
+  public pan_file_status = 1;
+  public aadharDropzone: any;
+  public panDropzone: any;
   constructor(
-    private formBuilder: FormBuilder
-  ) { }
+    private formBuilder: FormBuilder,
+  ) {
+  }
 
   async ngOnInit() {
     this.createProfileForm();
     this.localities = locations.locations;
     this.servicesList = await this.getServicesList();
+  
+
+    this.aadharDropzone  = new Dropzone("#aadhar-form");
+    this.panDropzone  = new Dropzone("#pan-form");
+
+
+    // await nhost.storage.upload({ file: file }).then(res => {
+    //   console.log(res.fileMetadata.id);
+    // }),
+    this.aadharDropzone.on("addedfile", async file => {
+      console.log(`File added: ${file}`);
+      this.aadhar_file = file;
+    });
+
+    this.panDropzone.on("addedfile", async file => {
+      console.log(`File added: ${file}`);
+      this.pan_file = file;
+    });
+    
   }
 
 
@@ -54,9 +81,35 @@ export class AddNewVendorComponent implements OnInit {
   
 
   async createVendor() {
+    
     const vendorData = this.profileForm.getRawValue();
     const { data, error } = await nhost.graphql.request(Query.InsertNewVendor(vendorData))
     if (data) {
+
+      const uploadPromises = [];
+
+       // Track which file is being uploaded
+       let aadharFileResult = null;
+       let panFileResult = null;
+   
+       if (this.aadhar_file) {
+         uploadPromises.push(nhost.storage.upload({ file: this.aadhar_file }).then(result => {
+           aadharFileResult = result;
+           this.aadhar_file_status = 3;
+           this.aadharDropzone.removeAllFiles( true );
+         }));
+       }
+   
+       if (this.pan_file) {
+         uploadPromises.push(nhost.storage.upload({ file: this.pan_file }).then(result => {
+           panFileResult = result;
+           this.pan_file_status = 3;
+           this.panDropzone.removeAllFiles( true );
+         }));
+       }
+
+      await Promise.all(uploadPromises);
+      
       const vendorObj = {
         user_id: data.insertUser.id,
         name : vendorData.displayName,
@@ -68,7 +121,13 @@ export class AddNewVendorComponent implements OnInit {
         pincode: vendorData.pincode,
         is_profile_completed: vendorData.is_profile_completed,
         wallet_money: vendorData.wallet_money || 0,
+        aadhar_file_id: aadharFileResult?.fileMetadata?.id || null,
+        pan_file_id: panFileResult?.fileMetadata?.id || null,
+        aadhar_file_status: this.aadhar_file_status,
+        pan_file_status: this.pan_file_status,
+        terms_and_conditions_file_id: '5cd084e3-65d6-46c6-aec7-45ddbca38304'
       };
+
       await this.addNewVendorProfile(vendorObj);
       const services = this.servicesList.filter(res => res.checked === true);
       for await (const service of services) {
@@ -88,7 +147,7 @@ export class AddNewVendorComponent implements OnInit {
   async addNewVendorService(serviceData) {
     const { data, error } = await nhost.graphql.request(Query.InsertVendorService(serviceData))
     if (data) {
-      // console.log(data);
+      console.log(data);
     }
   }
 

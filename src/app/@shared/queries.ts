@@ -241,8 +241,35 @@ export const InsertNewVendor = (vendorData: any) => gql`  mutation {
   }
 }`
 
-export const InsertNewVendorProfile = (vendorData: any) => gql`  mutation {
-  insert_vendor_profiles(objects: {
+// export const InsertNewVendorProfile = (vendorData: any) => gql`  mutation {
+//   insert_vendor_profiles(objects: {
+//     user_id: "${vendorData.user_id}",
+//     name: "${vendorData.name}",
+//     email: "${vendorData.email}",
+//     phone: "+91${vendorData.phone}",
+//     address: "${vendorData.address}",
+//     locality: "${vendorData.locality}",
+//     city: "${vendorData.city}",
+//     pincode: "${vendorData.pincode}",
+//     wallet_money: "${vendorData.wallet_money}",
+//     is_profile_completed: "${vendorData.is_profile_completed}",
+//     aadhar_file_id: "${vendorData.aadhar_file_id}",
+//     pan_file_id: "${vendorData.pan_file_id}",
+//     aadhar_file_status: "${vendorData.aadhar_file_status}",
+//     pan_file_status: "${vendorData.pan_file_status}",
+//     terms_and_conditions_file_id: "${vendorData.terms_and_conditions_file_id}"
+//   }) {
+//     returning {
+//       user_id
+//       name
+//       phone
+//     }
+//   }
+// }`
+
+export const InsertNewVendorProfile = (vendorData: any) => {
+  // Create the fields dynamically based on the presence of the value
+  const fields = `
     user_id: "${vendorData.user_id}",
     name: "${vendorData.name}",
     email: "${vendorData.email}",
@@ -253,14 +280,25 @@ export const InsertNewVendorProfile = (vendorData: any) => gql`  mutation {
     pincode: "${vendorData.pincode}",
     wallet_money: "${vendorData.wallet_money}",
     is_profile_completed: "${vendorData.is_profile_completed}",
-  }) {
-    returning {
-      user_id
-      name
-      phone
+    terms_and_conditions_file_id: "${vendorData.terms_and_conditions_file_id}"
+    ${vendorData.aadhar_file_id ? `, aadhar_file_id: "${vendorData.aadhar_file_id}"` : ''}
+    ${vendorData.pan_file_id ? `, pan_file_id: "${vendorData.pan_file_id}"` : ''}
+    ${vendorData.aadhar_file_status ? `, aadhar_file_status: "${vendorData.aadhar_file_status}"` : ''}
+    ${vendorData.pan_file_status ? `, pan_file_status: "${vendorData.pan_file_status}"` : ''}
+  `;
+
+  return gql`
+    mutation {
+      insert_vendor_profiles(objects: { ${fields} }) {
+        returning {
+          user_id
+          name
+          phone
+        }
+      }
     }
-  }
-}`
+  `;
+}
 
 export const DeleteVendor = (user_id) => gql `mutation {
   delete_vendor_profiles_by_pk(user_id: "${user_id}") {

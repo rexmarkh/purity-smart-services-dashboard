@@ -146,6 +146,7 @@ export class VendorProfileComponent implements OnInit {
     if (error) {
       throw error
     }
+    console.log('presignedUrl : ',presignedUrl);
     return presignedUrl.url
   }
 

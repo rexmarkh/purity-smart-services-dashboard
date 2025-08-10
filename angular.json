@@ -28,8 +28,7 @@
             ],
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              { "glob": "google75531cc174b1019d.html", "input": "src", "output": "/" },
+              "src/assets"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",

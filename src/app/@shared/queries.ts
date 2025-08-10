@@ -193,7 +193,8 @@ export const GetVendorServices = (vendorId: any) => {
 };
 
 export const serviceDetailsList = `query {
-  service_details(order_by: {sid: asc}) {
+  service_details(order_by: {sid: asc} where: { is_active: { _eq: true }}) {
+    is_active
     image_id
     description
     duration
